@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 import { MailappModule } from './mailapp.module';
+import 'dotenv/config'
 
 async function bootstrap() {
   //Levantar de forma default el servicio
@@ -12,6 +13,10 @@ async function bootstrap() {
     MailappModule,
     {
       transport: Transport.TCP,
+      options: {
+        host: process.env.MICROSERVICE_MAIL_APP, //or 0.0.0.0 para que escuche sobre todas las interfaces de red de si misma
+        port: parseInt(process.env.GATEWAY_IP_PORT)
+      },
     },
   );
   await app.listen();

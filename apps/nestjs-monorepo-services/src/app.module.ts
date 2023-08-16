@@ -3,6 +3,7 @@ import { ClientsModule } from '@nestjs/microservices/module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Transport } from '@nestjs/microservices';
+import 'dotenv/config'
 
 @Module({
   imports: [
@@ -10,9 +11,10 @@ import { Transport } from '@nestjs/microservices';
       {
         name: 'MAIL_SERVICE',
         transport: Transport.TCP,
-        /*options: {
-          host: 'http://127.0.0.1',
-        },*/
+        options: {
+          host: "mail-app", //ip  del servicio a conectarse
+          port: 3000
+        },
       },
     ]),
   ],

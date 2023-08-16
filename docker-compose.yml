@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  nest-gateway:
+    image: node:18.17.0
+    container_name: nest-gateway
+    working_dir: /usr/src/app
+    command: ["node", "dist/apps/nestjs-monorepo-services/main.js"]
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+    networks:
+      mi-red:
+
+  mail-app:
+    image: node:18.17.0
+    container_name: mail-app
+    working_dir: /usr/src/app
+    command: ["node", "dist/apps/mailapp/main.js"]
+    volumes:
+      - .:/usr/src/app
+    networks:
+      mi-red:
+
+networks:
+  mi-red:

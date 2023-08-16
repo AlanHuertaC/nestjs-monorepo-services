@@ -10,6 +10,7 @@ export class AppService {
   }
 
   newUser(user: any) {
+    console.log("emit- ", user);
     this.clientMail.emit('new_email', user);
 
     return 'send_queue';
