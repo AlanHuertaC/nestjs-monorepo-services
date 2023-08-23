@@ -9,7 +9,7 @@ export class AppService {
     return 'Hello World!';
   }
 
-  newUser(user: any) {
+  newUser(user: any):string {
     console.log("emit- ", user);
     this.clientMail.emit('new_email', user);
 

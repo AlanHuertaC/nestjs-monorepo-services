@@ -12,8 +12,8 @@ import 'dotenv/config'
         name: 'MAIL_SERVICE',
         transport: Transport.TCP,
         options: {
-          host: "mail-app", //ip  del servicio a conectarse
-          port: 3000
+          host: "haproxy", //ip  del servicio a conectarse
+          port: 80
         },
       },
     ]),

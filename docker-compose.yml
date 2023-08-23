@@ -1,6 +1,28 @@
 version: '3'
 
 services:
+  #redis:
+  #  image: redis
+  #  container_name: redis
+  #  ports:
+  #    - "6379:6379"
+  #  networks:
+  #    nest-network:
+
+  # HAProxy
+  haproxy:
+    image: haproxy:latest
+    container_name: ha-vcc
+    restart: ${RESTART_POLICY}
+    depends_on: 
+      - mail-app
+    ports:
+      - '80:80'
+    volumes:
+      - ./haproxy:/usr/local/etc/haproxy:ro
+    networks:
+      nest-network:
+
   nest-gateway:
     image: node:18.17.0
     container_name: nest-gateway
@@ -11,17 +33,18 @@ services:
     volumes:
       - .:/usr/src/app
     networks:
-      mi-red:
+      nest-network:
 
   mail-app:
     image: node:18.17.0
-    container_name: mail-app
+    depends_on: 
+      - nest-gateway
     working_dir: /usr/src/app
     command: ["node", "dist/apps/mailapp/main.js"]
     volumes:
       - .:/usr/src/app
     networks:
-      mi-red:
+      nest-network:
 
 networks:
-  mi-red:
+  nest-network:
