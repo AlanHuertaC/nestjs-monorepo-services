@@ -15,7 +15,8 @@ async function bootstrap() {
       transport: Transport.TCP,
       options: {
         host: "0.0.0.0", //process.env.MICROSERVICE_MAIL_APP, //or 0.0.0.0 para que escuche sobre todas las interfaces de red de si misma
-        port: parseInt(process.env.GATEWAY_IP_PORT)
+        port: parseInt(process.env.GATEWAY_IP_PORT),
+        retryAttempts: 5,
       },
     },
   );

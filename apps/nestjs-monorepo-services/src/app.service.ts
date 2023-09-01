@@ -9,10 +9,11 @@ export class AppService {
     return 'Hello World!';
   }
 
-  newUser(user: any):string {
+  newUser(user: any): Object{
     console.log("emit- ", user);
-    this.clientMail.emit('new_email', user);
-
-    return 'send_queue';
+    //this.clientMail.emit('new_email', user);
+    const pattern = { cmd: 'new_email' };
+    const payload = user;
+    return this.clientMail.send<Object>(pattern, payload);
   }
 }

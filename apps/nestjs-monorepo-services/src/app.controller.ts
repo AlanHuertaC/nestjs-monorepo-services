@@ -11,7 +11,7 @@ export class AppController {
   }
 
   @Post()
-  newUser(@Body() body: any): string {
+  newUser(@Body() body: any): Object {
     return this.appService.newUser(body);
   }
 }
